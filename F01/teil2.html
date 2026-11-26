@@ -1,9 +1,30 @@
 <!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Shadow mit mir! · Folge 01 · Gestern · Dün</title>
-<style>body{margin:0;font-family:system-ui,sans-serif;background:#FFFDFB;color:#2F2540;display:flex;min-height:100vh;align-items:center;justify-content:center}
-.c{max-width:420px;width:100%;margin:16px;padding:24px;border-radius:18px;background:#F4F1FB;text-align:center}
-h1{margin:0;color:#6F5DB0;font-size:26px} p{color:#6B6080;margin:6px 0 18px} audio{width:100%}
-a{color:#6F5DB0;font-weight:700;text-decoration:none}</style></head>
-<body><div class="c"><h1>Shadow mit mir! ♡</h1><p>Folge 01 · Gestern · Dün</p>
-<audio controls preload="auto" src="teil2.mp3"></audio>
-<p style="margin-top:16px">Önce dinle, sonra sesle birlikte konuş.</p><a href="https://www.instagram.com/memyselfbanu/">@memyselfbanu</a></div></body></html>
+<style>
+body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:#FFFDFB;color:#2F2540}
+.c{max-width:560px;margin:0 auto;padding:20px 16px 32px}
+.card{background:#F4F1FB;border-radius:18px;padding:20px;text-align:center}
+h1{margin:0;color:#6F5DB0;font-size:26px} .sub{color:#6B6080;margin:6px 0 14px}
+audio{width:100%}
+.now{min-height:118px;margin-top:14px;background:#fff;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.now .de{font-size:21px;font-weight:650;line-height:1.35} .now .tr{font-size:15px;color:#6B6080;font-style:italic}
+.hint{color:#6B6080;font-size:14px;margin:14px 0 0}
+ol{list-style:none;padding:0;margin:18px 0 0}
+li{display:flex;gap:10px;padding:10px 12px;border-radius:12px;cursor:pointer;text-align:left}
+li .n{color:#6F5DB0;font-weight:800;min-width:22px} li .de{font-weight:550} li .tr{color:#6B6080;font-size:14px;font-style:italic}
+li.on{background:#6F5DB0;color:#fff} li.on .n,li.on .tr{color:#fff}
+.foot{text-align:center;margin-top:20px} a{color:#6F5DB0;font-weight:700;text-decoration:none}
+</style></head><body><div class="c">
+<div class="card"><h1>Shadow mit mir! ♡</h1><div class="sub">Folge 01 · Gestern · Dün</div>
+<audio id="a" controls preload="auto" src="teil2.mp3"></audio>
+<div class="now" aria-live="polite"><div class="de" id="de">▶︎ Başlat'a bas</div><div class="tr" id="tr">Söylenen cümle burada görünür.</div></div>
+<p class="hint">Önce dinle, sonra sesle birlikte konuş. Bir cümleye dokununca oradan çalar.</p></div>
+<ol id="list"><li><span class="n">5</span><div><div class="de">Gestern war ich müde, weil ich um sechs Uhr aufgestanden bin.</div><div class="tr">Dün yorgundum, çünkü saat altıda kalktım.</div></div></li><li><span class="n">6</span><div><div class="de">Am Abend war Lenas Party, aber ich musste Shadowing machen.</div><div class="tr">Akşam arkadaşım Lena&#x27;nın partisi vardı ama shadowing yapmam gerekiyordu.</div></div></li><li><span class="n">7</span><div><div class="de">Also bin ich nicht zur Party gegangen.</div><div class="tr">Bu yüzden partiye gitmedim.</div></div></li><li><span class="n">8</span><div><div class="de">Ich habe viele neue Wörter gelernt und Grammatik geübt.</div><div class="tr">Birçok yeni kelime öğrendim ve gramer çalıştım.</div></div></li></ol>
+<div class="foot"><a href="https://www.instagram.com/memyselfbanu/">@memyselfbanu</a></div></div>
+<script>
+const S=[{"t": 0.0, "de": "Gestern war ich müde, weil ich um sechs Uhr aufgestanden bin.", "tr": "Dün yorgundum, çünkü saat altıda kalktım."}, {"t": 3.6, "de": "Am Abend war Lenas Party, aber ich musste Shadowing machen.", "tr": "Akşam arkadaşım Lena'nın partisi vardı ama shadowing yapmam gerekiyordu."}, {"t": 7.85, "de": "Also bin ich nicht zur Party gegangen.", "tr": "Bu yüzden partiye gitmedim."}, {"t": 10.44, "de": "Ich habe viele neue Wörter gelernt und Grammatik geübt.", "tr": "Birçok yeni kelime öğrendim ve gramer çalıştım."}];const a=document.getElementById('a'),de=document.getElementById('de'),tr=document.getElementById('tr'),L=[...document.querySelectorAll('#list li')];let cur=-1;
+function show(k){if(k===cur)return;cur=k;L.forEach((e,j)=>e.classList.toggle('on',j===k));if(k<0)return;de.textContent=S[k].de;tr.textContent=S[k].tr;L[k].scrollIntoView({block:'nearest',behavior:'smooth'});}
+a.addEventListener('timeupdate',()=>{const t=a.currentTime;let k=0;for(let j=0;j<S.length;j++)if(t>=S[j].t)k=j;show(k);});
+a.addEventListener('ended',()=>show(S.length-1));
+L.forEach((e,j)=>e.addEventListener('click',()=>{a.currentTime=S[j].t;a.play();}));
+</script></body></html>
